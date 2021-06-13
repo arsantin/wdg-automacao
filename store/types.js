@@ -1,0 +1,3 @@
+export const GET_POSTS = 'GET_POSTS';
+export const GET_POSTS_DETAILS = 'GET_POSTS_DETAILS';
+export const GET_GENRE_LIST = 'GET_GENRE_LIST';
