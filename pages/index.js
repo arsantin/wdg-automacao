@@ -1,45 +1,69 @@
-import Home from '../components/layout/Home'
-import Link from 'next/link';
+import Home from "../components/layout/Home";
+import Link from "next/link";
 
-import Layout from '../components/layout/Layout'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import {fetchposts} from '../store/actions/postAction'
-import { genreList } from '../store/actions/genreAction';
+import Layout from "../components/layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchposts, sendToFiltered } from "../store/actions/postAction";
+import { genreList } from "../store/actions/genreAction";
 
+const Index = () => {
+  const dispatch = useDispatch();
 
-const Index = ()=> {
-
-  const dispatch = useDispatch()
-
-  const {posts} = useSelector(state=>state.post)
-  const {genres} = useSelector(state=>state.genre)
-  
+  const { posts, filteredList } = useSelector((state) => state.post);
+  const { genres } = useSelector((state) => state.genre);  
 
   useEffect(() => {
-    dispatch(fetchposts())  
-    dispatch(genreList())   
-  },[])
-  
-  return(
-  <Layout>
-    <Home />
-    <div>
-      <h4>CATEGORIAS</h4>
-     {genres.genres && genres.genres.map((genre)=> {
-       return <div><p>{genre.name}</p></div>
-     })}
-      <h4>FILMES</h4>
-      {posts.results && posts.results.map((post) => {
-        return <Link href="/movie/[id]" as={`/movie/${post.id}`} ><a><div key={post.title}>
-          <h2>{post.title}</h2>
-          <div>{post.overview}</div>
-          </div></a></Link>
-      })}
-    </div>
-  </Layout>
-  )
-}
+    dispatch(fetchposts());
+    dispatch(genreList());
+  }, []);  
 
+  function toggler(e){
+    e.preventDefault();
+    const name = e.target.innerText
+    console.log(name)
+    const id = e.target.value
+
+    dispatch(sendToFiltered(id, name))
+  }
+
+  return (
+    <Layout>
+    
+      <div>
+      {filteredList && filteredList.map(cada => {
+        return <button onClick={toggler} value={cada.id}>{cada.name}</button>
+      })}
+        <h4>CATEGORIAS</h4>
+        {genres.genres &&
+          genres.genres.map((genre) => {
+            return (
+              <div>
+                <button onClick={toggler} value={genre.id}>{genre.name}</button>
+              </div>
+            );
+          })}
+        <h4>FILMES</h4>
+        {posts.results &&
+          posts.results.map((post) => {
+            return (
+              <div key={post.id}>
+                <Link href="/movie/[id]" as={`/movie/${post.id}`}>
+                  <a>
+                    <h2>{post.title}</h2>
+                  </a>
+                </Link>
+                {post.genre_ids &&
+                  post.genre_ids.map((id) => {
+                    return <h4>{id}</h4>;
+                  })}
+                <div>{post.overview}</div>
+              </div>
+            );
+          })}
+      </div>
+    </Layout>
+  );
+};
 
 export default Index;
