@@ -1,16 +1,21 @@
 import * as types from "../types";
 import axios from "axios";
 
+
 export const fetchposts = () => async (dispatch) => {
 
+  
 
   const res = await axios.get(
     "https://api.themoviedb.org/3/movie/popular?api_key=1cafedf2a856620e3b3fa86798661fe8&page=1"
   );
+  
+  const  perPage = 4;
+  const contagem = await res.data.length
 
-  const arrayMovies = localStorage.setItem('todosfilmes', JSON.stringify(res.data))
+  console.log(contagem)
 
-  console.log(arrayMovies)
+  const featMovie = await 
 
   dispatch({
     type: types.GET_POSTS,
@@ -31,13 +36,31 @@ export const fetchpostdetails = (id) => async (dispatch) => {
   });
 };
 
-export const sendToFiltered = (id, name) => async (dispatch) => {  
+export const sendToFiltered = (id, name, buttonStatus) => async (dispatch) => {  
   const obj= {
     id: id,
-    name: name
-  }  
+    name: name,
+    buttonStatus
+  }
+  console.log("obj", obj)
+  
   dispatch({
     type: types.FILTERED_LIST,
+    payload: obj,
+  });
+  
+};
+
+export const removeFromFiltered = (id, name, buttonStatus) => async (dispatch) => {  
+  const obj= {
+    id: id,
+    name: name,
+    buttonStatus
+  }
+  console.log("obj remove", obj)
+  
+  dispatch({
+    type: types.FILTERED_LIST_REMOVE,
     payload: obj,
   });
   

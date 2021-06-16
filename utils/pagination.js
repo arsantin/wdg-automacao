@@ -1,4 +1,4 @@
-function pagination(perPage){
+const pagination =(perPage)=>{
     const currentPage = Number(this.queryStr.page) || 1;
     const skipPage = perPage * (currentPage - 1);
 
@@ -6,4 +6,4 @@ function pagination(perPage){
     return this;
   }
 
-export default pagination
+export default { pagination}

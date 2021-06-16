@@ -30,24 +30,42 @@ export const postReducer = (state = initialState, action) => {
         error: null,
       };
     case types.FILTERED_LIST:
-      console.log("payload", action.payload.id);
-
-      let idAlreadyExists = state.filteredList.findIndex(
-        (i) => i.id === action.payload.id
-      ) > -1;
-      let filteredList = state.filteredList.slice();
+      let idAlreadyExists =
+        state.filteredList.findIndex((i) => i.id === action.payload.id) > -1;
       console.log("ja existe?", idAlreadyExists);
+      let filteredList = state.filteredList.slice();
 
       if (idAlreadyExists) {
-        filteredList = filteredList.filter((obj) => obj.id != action.payload.id);
+        console.log("ja existe");
+        filteredList = filteredList.filter((obj) => obj != action.payload.id);
       } else {
-        // modify the COPY, not the original
-        filteredList.push(action.payload);
+        const ok = filteredList.push(action.payload);
+        console.log(ok);
       }
+
+      console.log("lista filtrada", filteredList);
 
       return {
         ...state,
         filteredList: filteredList,
+        loading: false,
+        error: null,
+      };
+      case types.FILTERED_LIST_REMOVE:
+      let idExists =
+        state.filteredList.findIndex((i) => i.id === action.payload.id) > -1;      
+      let filteredL = state.filteredList.slice();
+
+      if (idExists) {
+        console.log("ja existe");
+        const filteredIndex = filteredL.findIndex((i) => i.id === action.payload.id)
+        console.log("index remove", filteredIndex);
+        filteredL.splice(filteredIndex, 1);        
+      }     
+
+      return {
+        ...state,
+        filteredList: filteredL,
         loading: false,
         error: null,
       };
