@@ -32,18 +32,17 @@ export const postReducer = (state = initialState, action) => {
     case types.FILTERED_LIST:
       let idAlreadyExists =
         state.filteredList.findIndex((i) => i.id === action.payload.id) > -1;
-      console.log("ja existe?", idAlreadyExists);
+     
       let filteredList = state.filteredList.slice();
 
       if (idAlreadyExists) {
-        console.log("ja existe");
+       
         filteredList = filteredList.filter((obj) => obj != action.payload.id);
       } else {
         const ok = filteredList.push(action.payload);
-        console.log(ok);
+       
       }
 
-      console.log("lista filtrada", filteredList);
 
       return {
         ...state,
@@ -57,9 +56,9 @@ export const postReducer = (state = initialState, action) => {
       let filteredL = state.filteredList.slice();
 
       if (idExists) {
-        console.log("ja existe");
+       
         const filteredIndex = filteredL.findIndex((i) => i.id === action.payload.id)
-        console.log("index remove", filteredIndex);
+      
         filteredL.splice(filteredIndex, 1);        
       }     
 
