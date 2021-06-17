@@ -22,13 +22,12 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(fetchposts());
-    dispatch(genreList());
-    if(filteredList.length < 0){
-      alert(filteredList.length)
-    }else{
-      filteredMovies();
-    }
+    dispatch(genreList());    
   }, []);
+
+  useEffect(() => {
+    filteredMovies()
+  }, [filteredList]);
 
   
 
@@ -49,9 +48,10 @@ const Index = () => {
     e.preventDefault();
     const name = e.target.innerText;   
     const id = e.target.value;
-    const buttonStatus = "active";
+    const buttonStatus = "active";    
     setButClass(true);
-    dispatch(sendToFiltered(id, name, buttonStatus));
+    e.disabled = true;
+    dispatch(sendToFiltered(id, name, buttonStatus));     
   }
 
   function removeFromChoices(e) {
@@ -60,6 +60,7 @@ const Index = () => {
     const id = e.target.value;
     const buttonStatus = "inactive";
     dispatch(removeFromFiltered(id, name, buttonStatus));
+    filteredMovies();
   }
 
   const divStyle = {
@@ -78,10 +79,9 @@ const Index = () => {
   return (
     <Layout>
       <div>
-      <button onClick={filteredMovies}>carrega filmes selecionados</button>
       <div style={divStyle}>
-          <h3 style={{ flexBasis: "100%" }}>Meus filtros</h3>
-
+          <h3 style={{ flexBasis: "100%" }}>Meus filtros</h3>        
+          <button>LIMPAR FILTROS</button>   
           {filteredList &&
             filteredList.map((cada) => {
               return (
@@ -114,6 +114,8 @@ const Index = () => {
               );
             })}
         </div>
+        <h4>FILTRADOS</h4>
+        <p>resultados da busca: Foram encontrados {filmesFiltrados && JSON.stringify(filmesFiltrados.length)} filme(s).</p>
         {filmesFiltrados &&
           filmesFiltrados.map((filme) => {
             return (

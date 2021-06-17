@@ -44,8 +44,7 @@ export const sendToFiltered = (id, name, buttonStatus) => async (dispatch) => {
   dispatch({
     type: types.FILTERED_LIST,
     payload: obj,
-  });
-  
+  });  
 };
 
 export const removeFromFiltered = (id, name, buttonStatus) => async (dispatch) => {  
