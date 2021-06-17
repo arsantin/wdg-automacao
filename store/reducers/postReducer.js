@@ -1,5 +1,6 @@
 import * as types from "../types";
 
+
 const initialState = {
   movie: {},
   filteredList: [],
@@ -49,6 +50,7 @@ export const postReducer = (state = initialState, action) => {
         filteredList: filteredList,
         loading: false,
         error: null,
+
       };
       case types.FILTERED_LIST_REMOVE:
       let idExists =

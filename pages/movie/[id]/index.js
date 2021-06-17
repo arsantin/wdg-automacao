@@ -3,6 +3,22 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import styled from "styled-components";
+
+const DetailsWrapper = styled.div`
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+  img{
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  border: solid 20px #f1f1f1;
+  width: 100%;
+  height: auto;
+  }
+`;
+
 
 const movieDetails = () => { 
 
@@ -18,9 +34,15 @@ const movieDetails = () => {
   },[])
 
  
-  return ( 
+  return (
     <>
-    <Link href="/"><a>voltar</a></Link>
+  <Link href="/"><a>voltar</a></Link> 
+    <DetailsWrapper>
+    
+    <img
+            src={`https://image.tmdb.org//t//p//w1280//${postdetails.poster_path}`}
+            alt=""
+          />
 <h1>{postdetails.original_title}</h1> 
 <p>{postdetails.overview}</p>
 <p><strong>Categorias:</strong></p>
@@ -29,6 +51,7 @@ const movieDetails = () => {
     return <li key={genre.id}>{genre.name}</li>
   })}
 </ul>
+</DetailsWrapper>
 </>
 );
 }

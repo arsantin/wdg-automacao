@@ -34,11 +34,10 @@ export const fetchpostdetails = (id) => async (dispatch) => {
   });
 };
 
-export const sendToFiltered = (id, name, buttonStatus) => async (dispatch) => {  
+export const sendToFiltered = (id, name) => async (dispatch) => {  
   const obj= {
     id: id,
-    name: name,
-    buttonStatus
+    name: name
   }
   
   dispatch({
@@ -47,11 +46,10 @@ export const sendToFiltered = (id, name, buttonStatus) => async (dispatch) => {
   });  
 };
 
-export const removeFromFiltered = (id, name, buttonStatus) => async (dispatch) => {  
+export const removeFromFiltered = (id, name) => async (dispatch) => {  
   const obj= {
     id: id,
-    name: name,
-    buttonStatus
+    name: name
   }
  
   

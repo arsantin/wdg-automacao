@@ -8,21 +8,22 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 html{
-  box-sizing: border-box;
-  background: #F5F4F0;
+  box-sizing: border-box;  
   display:block;
   height: 100%;
-  max-width: 640px;
+  max-width: 1400px;
   margin:0 auto;
   padding: 0;
 }
 
 body{
-  background-color:#fafafa;
+  background-image: linear-gradient(to top,#143342 0%,#000000 100%);
+  background-attachment: fixed;
+  color: #fff;
   min-height:100vh;
   padding: 1rem;
   margin-top:0;
-  font-family:Verdana;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 `;
 
