@@ -15,12 +15,7 @@ export const genreReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
-      case types.GENRE_REMOVE:
-        return {
-          genres: action.payload,
-          loading: false,
-          error: null,
-        };
+     
     default:
       return state;
   }

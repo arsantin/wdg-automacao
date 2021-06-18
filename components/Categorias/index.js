@@ -3,9 +3,8 @@ import styled from "styled-components";
 const CategoriasWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 50px;
-  
-  h6 {
+  margin-bottom: 50px;  
+  h5{
     flex-basis: 100%;
   }
   button{
@@ -27,7 +26,7 @@ const CategoriasWrapper = styled.div`
 const Categorias = (props) => {
   return (
     <CategoriasWrapper>
-      <h6>Categorias</h6>
+      <h5>Categorias</h5>
       {props.genres.genres &&
         props.genres.genres.map((genre) => {
           return (

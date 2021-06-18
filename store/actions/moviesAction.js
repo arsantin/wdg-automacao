@@ -2,7 +2,7 @@ import * as types from "../types";
 import axios from "axios";
 
 
-export const fetchposts = () => async (dispatch) => { 
+export const fetchmovies = () => async (dispatch) => { 
 
   const res = await axios.get(
     "https://api.themoviedb.org/3/movie/popular?api_key=1cafedf2a856620e3b3fa86798661fe8&page=1"
@@ -59,3 +59,11 @@ export const removeFromFiltered = (id, name) => async (dispatch) => {
   });
   
 };
+
+export const cleanFilters = () => async (dispatch) => {
+  dispatch({
+    type: types.CLEAN_FILTER
+  });
+  
+};
+

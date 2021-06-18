@@ -43,12 +43,15 @@ const Card = (props) => {
   return (
     <MainCard>      
         <div className="card_pic" key="ok">
-          <img
+        <Image
             src={`https://image.tmdb.org//t//p//w1280//${props.filme.poster_path}`}
             alt=""
+            layout="fixed"
+            width={200}
+            height={300}
           />
           <h2 className="average">{props.filme.vote_average}</h2>
-          <h5>{props.filme.title}</h5>
+          <h3>{props.filme.title}</h3>
         </div>       
         
     </MainCard>

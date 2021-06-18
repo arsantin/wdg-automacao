@@ -19,7 +19,8 @@ const CategoriasEscolhidasWrapper = styled.div`
     background-position: 7px 7px;
     &:hover {
       cursor: pointer;
-      background-color: ;
+      background-color: #000;
+      background-image: url(/img/x.png);
     }
   }
 `;

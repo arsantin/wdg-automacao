@@ -1,20 +1,23 @@
-import Filmes from "../components/Filmes";
-import Categorias from "../components/Categorias";
-import MeusFiltros from "../components/MeusFiltros";
-import Filtrados from "../components/Filtrados";
+import React, { lazy, Suspense } from 'react';
 import { useState } from "react";
-import Layout from "../components/layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
-  fetchposts,
+  fetchmovies,
   sendToFiltered,
   removeFromFiltered,
-} from "../store/actions/postAction";
+  cleanFilters
+} from "../store/actions/moviesAction";
 import { genreList } from "../store/actions/genreAction";
 import styled from "styled-components";
 
+const Filmes = lazy(() => import('../components/Filmes'))
+const MeusFiltros = lazy(() => import('../components/MeusFiltros'))
+const Categorias = lazy(() => import('../components/Categorias'));
+const Layout = lazy(() => import('../components/layout/Layout'))
+const Filtrados = lazy(() => import('../components/Filtrados'));
 
+const renderLoader = () => <p>Carregando...</p>;
 
 const IndexWrapper = styled.div`
   padding: 30px;
@@ -38,25 +41,61 @@ const IndexWrapper = styled.div`
       max-width: 100%;
       height: auto;
     }
+    @media(max-width: 767px){
+      display: none;
+    }
   }
   .content {
     flex-basis: 80%;
     padding-left: 220px;
     display: flex;
     justify-content: center;
+    @media(max-width: 767px){
+      flex-basis: 100%;
+      padding-left: 0px;
+    }
   }
   .dataContainer{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    div{
+      flex-basis: 30%;
+    }
+  }
+  .pagination{
+    width: 100%;
+    max-width: 140px;
+    margin: auto;
+    button{
+      border: none;
+      background: orange;
+      border-radius: 125px;
+      text-indent: -9999px;
+      width: 15px;
+      height: 15px;
+      margin: 10px;
+      &.active{
+        background-color: red;
+      }
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+  .ham{
+    @media(min-width: 768px){
+      display: none;
+    }
   }
 `;
 
 const Index = () => {
-
-  function Pagination({ data, RenderComponent, title, pageLimit, dataLimit }) {
+  function Pagination({ data, RenderComponent, title, pageLimit, dataLimit }) {    
     const [pages] = useState(Math.round(data.length / dataLimit));
-    const [currentPage, setCurrentPage] = useState(1);
-  
+    const [currentPage, setCurrentPage] = useState(1);  
+    
     function goToNextPage() {
       setCurrentPage((page) => page + 1);
     }
@@ -84,29 +123,15 @@ const Index = () => {
     return (
       <div>
       <h1>{title}</h1>
-  
-      {/* show the posts, 10 posts at a time */}
       <div className="dataContainer">
         {getPaginatedData().map((d, idx) => (
           <RenderComponent key={idx} data={d} />
         ))}
       </div>
   
-      {/* show the pagiantion
-          it consists of next and previous buttons
-          along with page numbers, in our case, 5 page
-          numbers at a time
-      */}
+    
       <div className="pagination">
-        {/* previous button */}
-        <button
-          onClick={goToPreviousPage}
-          className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
-        >
-          prev
-        </button>
-  
-        {/* show page numbers */}
+      
         {getPaginationGroup().map((item, index) => (
           <button
             key={index}
@@ -117,13 +142,7 @@ const Index = () => {
           </button>
         ))}
   
-        {/* next button */}
-        <button
-          onClick={goToNextPage}
-          className={`next ${currentPage === pages ? 'disabled' : ''}`}
-        >
-          next
-        </button>
+       
       </div>
     </div>
     )
@@ -135,7 +154,7 @@ const Index = () => {
   const { genres } = useSelector((state) => state.genre);
 
   useEffect(() => {
-    dispatch(fetchposts());
+    dispatch(fetchmovies());
     dispatch(genreList());
   }, []);
 
@@ -163,7 +182,7 @@ const Index = () => {
     const name = e.target.innerText;
     const id = e.target.value;
     e.disabled = true;
-    dispatch(sendToFiltered(id, name));
+    dispatch(sendToFiltered(id, name));    
   }
 
   function removeFromChoices(e) {
@@ -174,27 +193,21 @@ const Index = () => {
     filteredMovies();
   }
 
-  const divStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-  };
-
-  const checked = {
-    backgroundColor: "green",
-  };
-
-  const notchecked = {
-    backgroundColor: "red",
-  };
+  function cleanAllFilter(){
+    dispatch(cleanFilters());
+    filteredMovies();
+  }
 
   return (
+    <Suspense fallback={renderLoader()}>
     <Layout>
       <IndexWrapper>
-        <div className="fixed">
-          <img className="logo" src="/img/logo.png" />
+        <div className="ham">MENU</div>
+        <div className="fixed">               
           {filteredList.length > 0 && <MeusFiltros
             filteredList={filteredList}
             removeFromChoices={removeFromChoices}
+            cleanAllFilter={cleanAllFilter}
           />}
           
           <Categorias genres={genres} toggler={toggler} />
@@ -203,14 +216,15 @@ const Index = () => {
           {filmesFiltrados.length > 0 ? (
             <Filtrados filmesFiltrados={filmesFiltrados} />
           ) : (
-            <>                
-            <Pagination
+            <>   
+            {posts.results && <Pagination
             data={posts.results}
             RenderComponent={Filmes}
             title="Catálogo"
             pageLimit={4}
             dataLimit={6}
-          />
+          />}             
+            
           </>
           )}
         </div>
@@ -218,6 +232,7 @@ const Index = () => {
     </div>
       </IndexWrapper>
     </Layout>
+    </Suspense>
   );
 };
 

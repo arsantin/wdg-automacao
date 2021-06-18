@@ -1,6 +1,10 @@
-import Card from "../Card";
 import Link from "next/link";
 import styled from "styled-components";
+import React, { lazy, Suspense } from "react";
+
+const Card = lazy(() => import("../Card"));
+
+const renderLoader = () => <p>Carregando...</p>;
 
 const FiltradosWrapper = styled.div`
   display: flex;
@@ -22,6 +26,7 @@ const FiltradosWrapper = styled.div`
 
 const Filtrados = (props) => {
   return (
+    <Suspense fallback={renderLoader()}>
     <FiltradosWrapper>      
       <div className="count">
         Foram encontrados{" "}
@@ -42,6 +47,7 @@ const Filtrados = (props) => {
           );
         })}
     </FiltradosWrapper>
+    </Suspense>
   );
 };
 
