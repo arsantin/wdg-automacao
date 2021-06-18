@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styled from "styled-components";
+import Head from 'next/head'
 
 const DetailsWrapper = styled.div`
   max-width: 600px;
@@ -36,6 +37,10 @@ const movieDetails = () => {
  
   return (
     <>
+    <Head>
+      <title>PromobitFlix - {postdetails.title}</title>
+
+      </Head>
   <Link href="/"><a>voltar</a></Link> 
     <DetailsWrapper>
     

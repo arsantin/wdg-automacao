@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Footer from './Footer'
 import Header from './Header'
 
-const Layout = ({children, title='Meu título customizado.'}) => {
+const Layout = ({children, title='PromobitFlix'}) => {
   return(
     <div>
       <Head>

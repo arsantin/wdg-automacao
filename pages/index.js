@@ -208,8 +208,8 @@ const Index = () => {
             data={posts.results}
             RenderComponent={Filmes}
             title="Catálogo"
-            pageLimit={5}
-            dataLimit={3}
+            pageLimit={4}
+            dataLimit={6}
           />
           </>
           )}
