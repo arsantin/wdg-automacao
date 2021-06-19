@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => (
     <>
-    <div>home</div>
+    <h5>home</h5>
     <input type="text"/>
     <button>enviar</button>
     </>

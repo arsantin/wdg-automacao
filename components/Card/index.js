@@ -38,10 +38,9 @@ const MainCard = styled.div`
 `;
 
 const Card = (props) => {
-  console.log("props", props.filme)
   return (
     <MainCard>      
-        <div className="card_pic" key="ok">
+        <div className="card_pic" key={props.filme.id}>
         <Image
             src={`https://image.tmdb.org//t//p//w1280//${props.filme.poster_path}`}
             alt=""

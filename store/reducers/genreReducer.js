@@ -1,6 +1,6 @@
 import * as types from "../types";
 
-const initialState = {  
+const initialState = {
   genres: [],
   genre: {},
   loading: false,
@@ -8,14 +8,14 @@ const initialState = {
 };
 
 export const genreReducer = (state = initialState, action) => {
-  switch (action.type) {    
+  switch (action.type) {
     case types.GET_GENRE_LIST:
       return {
         genres: action.payload,
         loading: false,
         error: null,
       };
-     
+
     default:
       return state;
   }
