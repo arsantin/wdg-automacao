@@ -27,22 +27,28 @@ const IndexWrapper = styled.div`
     text-decoration: none;
   }
   .fixed {
+    opacity: 0.98;
     padding: 20px;
     flex-basis: 20%;
     position: fixed;
-    z-index: 100%;
+    z-index: 200;
     top: 0px;
     left: 0px;
     width: 200px;
     background: #000000;
     height: 100%;
     font-size: 14px;
+    &.show{
+      @media(max-width: 767px){        
+        display: none;
+      }
+    }
     .logo{
       max-width: 100%;
       height: auto;
     }
-    @media(max-width: 767px){
-      display: none;
+    @media(max-width: 767px){      
+      width: calc(100% - 40px);     
     }
   }
   .content {
@@ -84,7 +90,38 @@ const IndexWrapper = styled.div`
       }
     }
   }
+  h1{
+    text-align: center;
+  }
   .ham{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 22px;
+    z-index: 100;
+    &:hover{
+      cursor: pointer;
+    }
+    @media(min-width: 768px){
+      display: none;
+    }
+  }
+  .show{
+    display: block;
+  }
+  .hidden{
+    display: none;
+    @media(max-width: 767px){      
+      display: block;    
+    }
+  }
+  .fechar{
+    text-align: right;
+    font-size: 24px;
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+    }
     @media(min-width: 768px){
       display: none;
     }
@@ -92,18 +129,13 @@ const IndexWrapper = styled.div`
 `;
 
 const Index = () => {
+
+const [menuMob, setmenuMob] = useState(false)
+
   function Pagination({ data, RenderComponent, title, pageLimit, dataLimit }) {    
     const [pages] = useState(Math.round(data.length / dataLimit));
-    const [currentPage, setCurrentPage] = useState(1);  
+    const [currentPage, setCurrentPage] = useState(1);     
     
-    function goToNextPage() {
-      setCurrentPage((page) => page + 1);
-    }
-  
-    function goToPreviousPage() {
-      setCurrentPage((page) => page - 1);
-    }
-  
     function changePage(event) {
       const pageNumber = Number(event.target.textContent);
       setCurrentPage(pageNumber);
@@ -198,23 +230,33 @@ const Index = () => {
     filteredMovies();
   }
 
+  function abreMenu(){
+    setmenuMob(!menuMob)
+  }
+
+  function fechaMenu(){
+    setmenuMob(!menuMob)
+  }
+
   return (
     <Suspense fallback={renderLoader()}>
     <Layout>
       <IndexWrapper>
-        <div className="ham">MENU</div>
-        <div className="fixed">               
+        <div className="ham" onClick={abreMenu}>MENU</div>
+                
+        <div className={menuMob ? 'hidden' : 'fixed show'}>  
+        <div onClick={fechaMenu} className="fechar">Fechar X</div>             
           {filteredList.length > 0 && <MeusFiltros
             filteredList={filteredList}
             removeFromChoices={removeFromChoices}
             cleanAllFilter={cleanAllFilter}
           />}
           
-          <Categorias genres={genres} toggler={toggler} />
+          <Categorias genres={genres} toggler={toggler} abreMenu={abreMenu}/>
         </div>
         <div class="content">
           {filmesFiltrados.length > 0 ? (
-            <Filtrados filmesFiltrados={filmesFiltrados} />
+            <Filtrados filmesFiltrados={filmesFiltrados}/>
           ) : (
             <>   
             {posts.results && <Pagination

@@ -18,8 +18,7 @@ const Layout = ({ children, title = "PromobitFlix" }) => {
         ></meta>
       </Head>
       <Header />
-      {children}
-      <Footer />
+      {children}      
     </Suspense>
   );
 };

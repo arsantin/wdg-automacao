@@ -5,7 +5,6 @@ import Image from 'next/image'
 const MainCard = styled.div`
   margin: 20px;
   padding: 20px;
-  border-radius: 5px;
   background: #131313;
   max-width: 200px;
   color: #fff;

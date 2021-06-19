@@ -32,6 +32,16 @@ const DetailsWrapper = styled.div`
     flex-basis: calc(60% - 40px);
     padding: 0px 20px;
   }
+  .back{
+    background: orange;
+    padding: 5px;
+    border-radius: 5px;
+    
+  }
+  a{
+      color: #000;
+      text-decoration: none;
+    }
 `;
 
 const movieDetails = () => {
@@ -72,15 +82,15 @@ const movieDetails = () => {
             <p>
               <strong>Categorias:</strong>
             </p>
-            <ul>
+            
               {postdetails.genres &&
                 postdetails.genres.map((genre) => {
-                  return <li key={genre.id}>{genre.name}</li>;
+                  return <div key={genre.id}>{genre.name}</div>;
                 })}
-            </ul>
+           
           </div>
           <Link href="/">
-            <a>voltar</a>
+            <a className="back">voltar</a>
           </Link>
         </DetailsWrapper>
       </Layout>

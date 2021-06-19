@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ["image.tmdb.org"]
   },  
+  pwa: {
+    dest: 'public'
+}
 }

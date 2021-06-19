@@ -26,7 +26,7 @@ const CategoriasWrapper = styled.div`
 const Categorias = (props) => {
   return (
     <CategoriasWrapper>
-      <h5>Categorias</h5>
+      <h5>Categorias</h5>      
       {props.genres.genres &&
         props.genres.genres.map((genre) => {
           return (
