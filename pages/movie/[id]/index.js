@@ -19,6 +19,9 @@ const DetailsWrapper = styled.div`
   margin: auto;
   .left {
     flex-basis: 40%;
+    @media(max-width: 767px){
+      flex-basis: 100%;
+    }
     .poster {
       max-width: 350px;
       margin: auto;
@@ -31,6 +34,9 @@ const DetailsWrapper = styled.div`
   .right {
     flex-basis: calc(60% - 40px);
     padding: 0px 20px;
+    @media(max-width: 767px){
+      flex-basis: calc(100% - 40px);
+    }
   }
   .back{
     background: orange;
