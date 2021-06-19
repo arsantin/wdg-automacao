@@ -27,6 +27,7 @@ const IndexWrapper = styled.div`
     text-decoration: none;
   }
   .fixed {
+    display: block;
     opacity: 0.98;
     padding: 20px;
     flex-basis: 20%;
