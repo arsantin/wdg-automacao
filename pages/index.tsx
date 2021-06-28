@@ -7,9 +7,7 @@ import Layout from "../components/Layout";
 
 const Index = () => {  
   const dispatch = useDispatch(); 
-
   const { register, handleSubmit, formState: { errors }, } = useForm();
-
   function loginApp(data) {
     dispatch(loginUser(data));    
   }
