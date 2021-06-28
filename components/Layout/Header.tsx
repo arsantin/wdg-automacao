@@ -4,21 +4,16 @@ import styled from "styled-components";
 
 
 const HeaderWrapper = styled.div`
-  text-align: right;
+  text-align: lert;
+  font-size: 36px;
+  color: #fff;
 `
 
 
 const Header = () => {
   return(
     <HeaderWrapper>
-      <Link href="/"><a>
-     <Image            
-            alt=""
-            width={200}
-            height={40}
-            className="logo" 
-            src="/img/logo.png"
-          /></a></Link>  
+     WDG
     </HeaderWrapper>
   )
 }

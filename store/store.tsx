@@ -14,6 +14,6 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
-
-
 export default { store, persistor };
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

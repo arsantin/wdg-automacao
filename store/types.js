@@ -1,6 +1,3 @@
-export const GET_POSTS = 'GET_POSTS';
-export const GET_POSTS_DETAILS = 'GET_POSTS_DETAILS';
-export const GET_GENRE_LIST = 'GET_GENRE_LIST';
-export const FILTERED_LIST = 'FILTERED_LIST';
-export const FILTERED_LIST_REMOVE = 'FILTERED_LIST_REMOVE';
-export const CLEAN_FILTER = 'CLEAN_FILTER';
+export const GET_USERS = "GET_USERS";
+export const GET_USER_DETAILS = "GET_POSTS_DETAILS";
+export const UPDATE_USER = "UPDATE_USER";

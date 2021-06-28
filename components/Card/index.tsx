@@ -1,9 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import Image from 'next/image'
+import Link from 'next/link'
+
 
 const MainCard = styled.div`
-  margin: 20px;
+  margin: 5px;
   padding: 20px;
   background: #131313;
   max-width: 200px;
@@ -13,10 +13,7 @@ const MainCard = styled.div`
     text-decoration: none;
     color: orange;
   }
-  &:hover {
-    background: #353535;
-    cursor: pointer;
-  }
+  
   img {
     max-width: 250px;
     width: 100%;
@@ -35,23 +32,32 @@ const MainCard = styled.div`
     right: 20px;
     top: 0px;
   }
+  input{
+    width: 30px;
+    text-align: center;
+    margin: 5px;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+  .ativo{
+    border: none;
+    background-color: #440b3a;
+    padding: 10px;
+    color: #ebecd0;
+
+  }  
 `;
 
-const Card = (props) => {
+const Card = (props) => {  
+ 
   return (
     <MainCard>      
-        <div className="card_pic" key={props.filme.id}>
-        <Image
-            src={`https://image.tmdb.org//t//p//w1280//${props.filme.poster_path}`}
-            alt=""
-            layout="fixed"
-            width={200}
-            height={300}
-          />
-          <h2 className="average">{props.filme.vote_average}</h2>
-          <h3>{props.filme.title}</h3>
-        </div>       
-        
+        <div className="card_pic" key={props.user.id}>
+          <Link href="/users/[id]" as={`/users/${props.user.id}`}>
+            <a>
+          <h3>{props.user.first_name} {props.user.last_name}</h3></a></Link> 
+        </div>               
     </MainCard>
   );
 };
