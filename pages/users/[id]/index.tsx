@@ -79,8 +79,7 @@ const movieDetails = () => {
             type="firstname"
             placeholder={userdetails.data.first_name}
             {...register("firstname")}            
-          />         
-          
+          />            
           <input
             type="email"
             value={userdetails.data.email}
