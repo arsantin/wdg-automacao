@@ -1,52 +1,28 @@
 import styled from "styled-components";
 import Link from 'next/link'
+import Image from 'next/image'
 
 
 const MainCard = styled.div`
   margin: 5px;
   padding: 20px;
-  background: #131313;
+  background-image: linear-gradient(to top,#070c10 0%,#2a4961 100%);
   max-width: 200px;
   color: #fff;
   position: relative;
+  h3{
+    color: orange;
+  }
   a {
     text-decoration: none;
     color: orange;
+    text-align: center;   
+    width: 100%; 
   }
-  
-  img {
-    max-width: 250px;
-    width: 100%;
-    height: auto;
+  .avatar{
+    border-radius: 125px;
+    border: solid 5px orange;
   }
-  .card_name {
-    color: #000;
-    font-weight: 700;
-  }
-  .average{
-    background-color: #154052;
-    border-radius: 0px 0px 0px 10px;
-    padding: 8px;
-    position: absolute;
-    z-index: 100;
-    right: 20px;
-    top: 0px;
-  }
-  input{
-    width: 30px;
-    text-align: center;
-    margin: 5px;
-  }
-  button:hover{
-    cursor: pointer;
-  }
-  .ativo{
-    border: none;
-    background-color: #440b3a;
-    padding: 10px;
-    color: #ebecd0;
-
-  }  
 `;
 
 const Card = (props) => {  
@@ -54,9 +30,17 @@ const Card = (props) => {
   return (
     <MainCard>      
         <div className="card_pic" key={props.user.id}>
-          <Link href="/users/[id]" as={`/users/${props.user.id}`}>
-            <a>
-          <h3>{props.user.first_name} {props.user.last_name}</h3></a></Link> 
+          
+            <Image            
+            alt=""
+            width={120}
+            height={120}
+            className="avatar" 
+            src={props.user.avatar}
+          />
+          <h3>{props.user.first_name} {props.user.last_name}</h3>
+         <Link href="/users/[id]" as={`/users/${props.user.id}`}>
+            <a>editar</a></Link> 
         </div>               
     </MainCard>
   );

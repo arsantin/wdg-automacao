@@ -17,7 +17,7 @@ html{
 }
 
 body{
-  background-image: linear-gradient(to top,#143342 0%,#000000 100%);
+  background-color: #182f40;
   background-attachment: fixed;
   color: #fff;
   min-height:100vh;

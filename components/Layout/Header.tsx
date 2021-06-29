@@ -7,13 +7,22 @@ const HeaderWrapper = styled.div`
   text-align: lert;
   font-size: 36px;
   color: #fff;
+  text-align: center;
+  margin-bottom: 50px;
+ 
 `
 
 
 const Header = () => {
   return(
     <HeaderWrapper>
-     WDG
+    <Image            
+            alt=""
+            width={85}
+            height={85}
+            className="logo" 
+            src="/img/logo.png"
+          /> 
     </HeaderWrapper>
   )
 }

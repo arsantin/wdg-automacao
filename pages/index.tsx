@@ -14,8 +14,9 @@ const Index = () => {
 
   return (    
       <Layout>
-        <IndexWrapper>
+        <IndexWrapper>          
         <form onSubmit={handleSubmit(loginApp)}>
+          <h2>Login</h2>
           <input
             type="email"
             placeholder="E-mail"

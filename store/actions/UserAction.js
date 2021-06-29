@@ -14,7 +14,7 @@ export const loginUser = (data) => async (dispatch) => {
           },
         };
         axios
-          .get("https://reqres.in/api/users?delay=2", config)
+          .get("https://reqres.in/api/users", config)
           .then((response) => {
             console.log(response);
             dispatch({
@@ -39,7 +39,7 @@ export const fetchUserDetails = (id) => async (dispatch) => {
   console.log(idUser)
   
   const res = await fetch(
-    `https://reqres.in/api/users/${idUser}`
+    `https://reqres.in/api/users/${idUser}?delay=2`
   );
   console.log("res", res);
 
